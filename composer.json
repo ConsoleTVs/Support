@@ -1,0 +1,21 @@
+{
+    "name": "consoletvs/support",
+    "description": "ConsoleTVs support library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erik Campobadal",
+            "email": "soc@erik.cat"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConsoleTVs\\Support\\": "."
+        }
+    }
+}
