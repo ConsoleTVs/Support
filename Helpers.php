@@ -91,7 +91,7 @@ class Helpers
      * @param  float $value
      * @return float
      */
-    public static function materialRound(float $value) : float
+    public static function materialRound(float $value)
     {
         if ($value > 999 && $value <= 999999) {
             return floor($value / 1000) . ' K';
