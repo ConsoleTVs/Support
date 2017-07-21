@@ -10,6 +10,8 @@
 
 namespace ConsoleTVs\Support;
 
+use Image;
+
 /**
  * ConsoleTVs Helpers class.
  *
@@ -22,7 +24,7 @@ class Helpers
      *
      * @var array
      */
-    public $material_colors = [
+    public static $material_colors = [
         'red'           => '#F44336',
         'pink'          => '#E91E63',
         'purple'        => '#9C27B0',
@@ -74,7 +76,7 @@ class Helpers
      */
     public static function materialColors(string $color = null)
     {
-        $colors = collect($this->material_colors);
+        $colors = collect(self::$material_colors);
 
         if (!$color) {
             return $colors;
@@ -113,21 +115,21 @@ class Helpers
      *
      * @return string
      */
-    public static function materialAvatar(string $name, float $dimensions = 150, string $color = null) : string
+    public static function materialAvatar(string $name, float $dimensions = 100, string $color = null) : string
     {
 
-        $letter = mb_substr($str, 0, 1, 'utf-8');
+        $letter = mb_substr($name, 0, 1, 'utf-8');
 
         if (!$color) {
-            $color = $this->materialColors()->random();
+            $color = static::materialColors()->random();
         }
 
         $text_position = bcdiv($dimensions, 2, 2);
 
         return Image::canvas($dimensions, $dimensions, $color)
             ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
-                $font->file(__DIR__ . 'Assets/fonts/Roboto-Light.ttf')
-                    ->size($dimensions)
+                $font->file(__DIR__ . '/Assets/fonts/Roboto-Light.ttf')
+                    ->size(bcdiv($dimensions, 1.75, 2))
                     ->color('#ffffff')
                     ->align('center')
                     ->valign('middle');
