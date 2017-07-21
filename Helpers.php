@@ -122,6 +122,8 @@ class Helpers
 
         if (!$color) {
             $color = static::materialColors()->random();
+        } else {
+            $color = static::materialColors()->get($color);
         }
 
         $text_position = bcdiv($dimensions, 2, 2);
