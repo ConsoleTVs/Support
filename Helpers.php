@@ -101,4 +101,25 @@ class Helpers
 
         return $value;
     }
+
+    public static function materialAvatar($name, $dimensions = 150, $color = null)
+    {
+        $letter = mb_substr($str, 0, 1, 'utf-8');
+
+        if (!$color) {
+            $color = $this->materialColors()->random();
+        }
+
+        $text_position = bcdiv($dimensions, 2, 2);
+
+        return Image::canvas($dimensions, $dimensions, $color)
+            ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
+                $font->file(__DIR__ . 'Assets/fonts/Roboto-Light.ttf'))
+                    ->size($dimensions)
+                    ->color('#ffffff')
+                    ->align('center')
+                    ->valign('middle');
+            })
+            ->encode('data-url');
+    }
 }
