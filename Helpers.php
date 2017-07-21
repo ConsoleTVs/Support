@@ -51,7 +51,7 @@ class Helpers
      *
      * @return string
      */
-    public static function clientIP()
+    public static function clientIP() : string
     {
         if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
           return $_SERVER['HTTP_CF_CONNECTING_IP'];
@@ -70,9 +70,9 @@ class Helpers
      * @author Erik Campobadal <soc@erik.cat>
      *
      * @param  string $color
-     * @return Collection | String
+     * @return mixed Collection|String
      */
-    public static function materialColors($color = null)
+    public static function materialColors(string $color = null)
     {
         $colors = collect($this->material_colors);
 
@@ -91,7 +91,7 @@ class Helpers
      * @param  float $value
      * @return float
      */
-    public static function materialRound($value)
+    public static function materialRound(float $value) : float
     {
         if ($value > 999 && $value <= 999999) {
             return floor($value / 1000) . ' K';
@@ -102,8 +102,20 @@ class Helpers
         return $value;
     }
 
-    public static function materialAvatar($name, $dimensions = 150, $color = null)
+    /**
+     * Returns a material design avatar for the given data.
+     *
+     * @author Erik Campobadal <soc@erik.cat>
+     *
+     * @param  string  $name
+     * @param  integer $dimensions
+     * @param  string  $color
+     *
+     * @return string
+     */
+    public static function materialAvatar(string $name, float $dimensions = 150, string $color = null) : string
     {
+
         $letter = mb_substr($str, 0, 1, 'utf-8');
 
         if (!$color) {
@@ -114,7 +126,7 @@ class Helpers
 
         return Image::canvas($dimensions, $dimensions, $color)
             ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
-                $font->file(__DIR__ . 'Assets/fonts/Roboto-Light.ttf'))
+                $font->file(__DIR__ . 'Assets/fonts/Roboto-Light.ttf')
                     ->size($dimensions)
                     ->color('#ffffff')
                     ->align('center')

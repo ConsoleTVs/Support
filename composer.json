@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "php": "^7.0",
         "illuminate/support": "5.*",
         "intervention/image": "^2.4"
     },
