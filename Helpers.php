@@ -10,7 +10,7 @@
 
 namespace ConsoleTVs\Support;
 
-use Image;
+use Intervention\Image\Facades\Image;
 
 /**
  * ConsoleTVs Helpers class.
