@@ -13,7 +13,7 @@ class SupportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->register('Intervention\\Image\\ImageServiceProvider');
     }
 
     /**
