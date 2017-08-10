@@ -167,5 +167,10 @@ class Helpers
         return substr($result,0,$dd);
     }
     
+    public static function strReplaceFile(string $find, string $replace, string $file_path)
+    {
+        file_put_contents($file_path, str_replace($find, $replace, file_get_contents($file_path)));
+    }
+    
     
 }
