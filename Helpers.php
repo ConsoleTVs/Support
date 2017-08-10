@@ -138,4 +138,34 @@ class Helpers
             })
             ->encode('data-url');
     }
+    
+    public static function copyDir(string $src, string $dst) { 
+        $dir = opendir($src); 
+        @mkdir($dst); 
+        while(false !== ( $file = readdir($dir)) ) { 
+            if (( $file != '.' ) && ( $file != '..' )) { 
+                if ( is_dir($src . '/' . $file) ) { 
+                    static::copyDir($src . '/' . $file, $dst . '/' . $file); 
+                } 
+                else { 
+                    copy($src . '/' . $file,$dst . '/' . $file); 
+                } 
+            } 
+        } 
+        closedir($dir); 
+    }
+    
+    public static function getBetween(string $var1 = "", string $var2 = "", string $pool) : string
+    {
+        $temp1 = strpos($pool, $var1) + strlen($var1);
+        $result = substr($pool, $temp1, strlen($pool));
+        $dd = strpos($result, $var2);
+        if ($dd == 0) {
+            $dd = strlen($result);
+        }
+
+        return substr($result,0,$dd);
+    }
+    
+    
 }
