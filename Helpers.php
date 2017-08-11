@@ -138,23 +138,22 @@ class Helpers
             })
             ->encode('data-url');
     }
-    
-    public static function copyDir(string $src, string $dst) { 
-        $dir = opendir($src); 
-        @mkdir($dst); 
-        while(false !== ( $file = readdir($dir)) ) { 
-            if (( $file != '.' ) && ( $file != '..' )) { 
-                if ( is_dir($src . '/' . $file) ) { 
-                    static::copyDir($src . '/' . $file, $dst . '/' . $file); 
-                } 
-                else { 
-                    copy($src . '/' . $file,$dst . '/' . $file); 
-                } 
-            } 
-        } 
-        closedir($dir); 
+
+    public static function copyDir(string $src, string $dst) {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                if ( is_dir($src . '/' . $file) ) {
+                    static::copyDir($src . '/' . $file, $dst . '/' . $file);
+                } else {
+                    copy($src . '/' . $file,$dst . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
     }
-    
+
     public static function getBetween(string $var1 = "", string $var2 = "", string $pool) : string
     {
         $temp1 = strpos($pool, $var1) + strlen($var1);
@@ -166,11 +165,26 @@ class Helpers
 
         return substr($result,0,$dd);
     }
-    
+
     public static function strReplaceFile(string $find, string $replace, string $file_path)
     {
         file_put_contents($file_path, str_replace($find, $replace, file_get_contents($file_path)));
     }
-    
-    
+
+    public static function massStrReplaceFile(string $find, string $replace, string $path)
+    {
+        $dir = opendir($path);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                if ( is_dir($path . '/' . $file) ) {
+                    static::massStrReplaceFile($find, $replace, $path . '/' . $file);
+                } else {
+                    static::strReplaceFile($find, $replace, $path . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+
+
 }
