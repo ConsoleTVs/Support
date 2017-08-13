@@ -185,6 +185,15 @@ class Helpers
         }
         closedir($dir);
     }
+    
+    public static function strClean(string $string) : string
+    {
+        return preg_replace(
+            '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron);~i',
+            '$1',
+            htmlentities($string, ENT_COMPAT, 'UTF-8')
+        );
+    }
 
 
 }
