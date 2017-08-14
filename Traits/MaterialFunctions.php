@@ -85,15 +85,23 @@ trait MaterialFunctions
         }
 
         $text_position = bcdiv($dimensions, 2, 2);
+        $cache_key = "support__material_avatar:{$letter}_{$dimensions}_{$color}";
 
-        return Image::canvas($dimensions, $dimensions, $color)
-            ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
-                $font->file(__DIR__ . '/Assets/fonts/Roboto-Light.ttf')
-                    ->size(bcdiv($dimensions, 1.75, 2))
-                    ->color('#ffffff')
-                    ->align('center')
-                    ->valign('middle');
-            })
-            ->encode('data-url');
+        if (!Cache::has($cache_key)) {
+            Cache::put(
+                $cache_key,
+                Image::canvas($dimensions, $dimensions, $color)
+                    ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
+                        $font->file(__DIR__ . '/Assets/fonts/Roboto-Light.ttf')
+                            ->size(bcdiv($dimensions, 1.75, 2))
+                            ->color('#ffffff')
+                            ->align('center')
+                            ->valign('middle');
+                    })
+                    ->encode('data-url')
+            );
+        }
+
+        return Cache::get($cache_key);
     }
 }
