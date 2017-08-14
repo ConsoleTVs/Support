@@ -47,4 +47,23 @@ trait Utilities
 
         return Collection::make($json);
     }
+
+    /**
+     * Returns the most used value in a collection or array.
+     *
+     * @author Erik Campobadal Fores <soc@erik.cat>
+     * @copyright 2017 erik.cat
+     * @param array $array
+     * @return [type]
+     */
+    public static function mostUsed($data) : string
+    {
+        if (is_a($data, Collection::class)) {
+            $data = $data->toArray();
+        }
+
+        $count = array_count_values($data);
+
+        return array_search(max($count), $count);
+    }
 }
