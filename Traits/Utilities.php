@@ -2,6 +2,8 @@
 
 namespace ConsoleTVs\Support\Traits;
 
+use Illuminate\Support\Collection;
+
 trait Utilities
 {
     /**
@@ -22,5 +24,27 @@ trait Utilities
         }
 
         return $_SERVER['REMOTE_ADDR'];
+    }
+
+    /**
+     * Return all the currencies or the one specified.
+     *
+     * @author Erik Campobadal Fores <soc@erik.cat>
+     * @copyright 2017 erik.cat
+     * @param string|null $currency
+     * @return Collection
+     */
+    public static function currencies(string $currency = null) : Collection
+    {
+        $currency = strtoupper($currency);
+
+        $file = __DIR__ . "/../Assets/Currencies.json";
+        $json = json_decode(file_get_contents($file), true);
+
+        if ($currency) {
+            return Collection::make($json[$currency]);
+        }
+
+        return Collection::make($json);
     }
 }

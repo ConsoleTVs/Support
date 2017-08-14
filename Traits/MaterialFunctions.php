@@ -2,6 +2,8 @@
 
 namespace ConsoleTVs\Support\Traits;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 
 trait MaterialFunctions
@@ -16,7 +18,7 @@ trait MaterialFunctions
      */
     public static function materialColors(string $color = null)
     {
-        $colors = collect([
+        $colors = Collection::make([
             'red'           => '#F44336',
             'pink'          => '#E91E63',
             'purple'        => '#9C27B0',
@@ -88,18 +90,17 @@ trait MaterialFunctions
         $cache_key = "support__material_avatar:{$letter}_{$dimensions}_{$color}";
 
         if (!Cache::has($cache_key)) {
-            Cache::put(
-                $cache_key,
-                Image::canvas($dimensions, $dimensions, $color)
-                    ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
-                        $font->file(__DIR__ . '/Assets/fonts/Roboto-Light.ttf')
-                            ->size(bcdiv($dimensions, 1.75, 2))
-                            ->color('#ffffff')
-                            ->align('center')
-                            ->valign('middle');
-                    })
-                    ->encode('data-url')
-            );
+            $image = Image::canvas($dimensions, $dimensions, $color)
+                ->text($letter, $text_position, $text_position, function ($font) use ($dimensions) {
+                    $font->file(__DIR__ . '/../Assets/fonts/Roboto-Light.ttf')
+                        ->size(bcdiv($dimensions, 1.75, 2))
+                        ->color('#ffffff')
+                        ->align('center')
+                        ->valign('middle');
+                })
+                ->encode('data-url');
+            Cache::put($cache_key, $image);
+            return $image;
         }
 
         return Cache::get($cache_key);
