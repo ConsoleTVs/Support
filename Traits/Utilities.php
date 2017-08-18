@@ -54,7 +54,7 @@ trait Utilities
      * @author Erik Campobadal Fores <soc@erik.cat>
      * @copyright 2017 erik.cat
      * @param array $array
-     * @return [type]
+     * @return string
      */
     public static function mostUsed($data) : string
     {
@@ -65,5 +65,21 @@ trait Utilities
         $count = array_count_values($data);
 
         return array_search(max($count), $count);
+    }
+
+    /**
+     * Return the gavatar for the given email.
+     *
+     * @author Erik Campobadal Fores <soc@erik.cat>
+     * @copyright 2017 erik.cat
+     * @param string $email
+     * @param int|integer $size
+     * @return string
+     */
+    public static function gavatar(string $email, int $size = 100) : string
+    {
+        $hash = md5(strtolower(trim($email)));
+
+        return "https://www.gravatar.com/avatar/{$hash}.jpg?s={$size}";
     }
 }
