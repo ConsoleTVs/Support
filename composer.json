@@ -20,5 +20,12 @@
         "psr-4": {
             "ConsoleTVs\\Support\\": "."
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ConsoleTVs\\Support\\SupportServiceProvider"
+            ]
+        }
     }
 }
