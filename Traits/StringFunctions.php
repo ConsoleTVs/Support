@@ -50,7 +50,7 @@ trait StringFUnctions
      *
      * @return string
      */
-    public function randomString(int $length = 10, string $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : string
+    public static function randomString(int $length = 10, string $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : string
     {
         return substr(str_shuffle(str_repeat($x = $letters, ceil($length / strlen($x)))), 1, $length);
     }
