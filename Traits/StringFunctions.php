@@ -42,4 +42,16 @@ trait StringFUnctions
             htmlentities($string, ENT_COMPAT, 'UTF-8')
         );
     }
+    
+    /**
+     * Return a random string.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function randomString($length = 10, $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    {
+        return substr(str_shuffle(str_repeat($x = $letters, ceil($length / strlen($x)))), 1, $length);
+    }
 }
