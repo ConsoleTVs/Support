@@ -82,4 +82,17 @@ trait Utilities
 
         return "https://www.gravatar.com/avatar/{$hash}.jpg?s={$size}";
     }
+    
+    /**
+     * Returns the seconds in a hour string format.
+     *
+     * @param float $seconds
+     * @return string
+     */
+    public static function secToHourFormat(float $seconds) : string
+    {
+        $t = round($seconds);
+        
+        return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
+    }
 }
