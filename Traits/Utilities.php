@@ -2,6 +2,7 @@
 
 namespace ConsoleTVs\Support\Traits;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Collection;
 
 trait Utilities
@@ -82,7 +83,7 @@ trait Utilities
 
         return "https://www.gravatar.com/avatar/{$hash}.jpg?s={$size}";
     }
-    
+
     /**
      * Returns the seconds in a hour string format.
      *
@@ -92,7 +93,20 @@ trait Utilities
     public static function secToHourFormat(float $seconds) : string
     {
         $t = round($seconds);
-        
-        return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
+
+        return sprintf('%02d:%02d:%02d', ($t/3600), ($t/60%60), $t%60);
+    }
+
+    /**
+     * Returns if the request URL have an active segment.
+     *
+     * @param  string   $name
+     * @param  int      $segment
+     * @param  string   $class
+     * @return string
+     */
+    public static function activeSegUrl(string $name, int $segment = 1, $class = 'active') : string
+    {
+        return Request::segment($segment) == $name ? $class : '';
     }
 }
