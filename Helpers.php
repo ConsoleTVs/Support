@@ -15,6 +15,7 @@ use ConsoleTVs\Support\Traits\FileFunctions;
 use ConsoleTVs\Support\Traits\StringFunctions;
 use ConsoleTVs\Support\Traits\MaterialFunctions;
 use ConsoleTVs\Support\Traits\WorldFunctions;
+use ConsoleTVs\Support\Traits\LanguageFunctions;
 
 /**
  * ConsoleTVs Helpers class.
@@ -23,5 +24,5 @@ use ConsoleTVs\Support\Traits\WorldFunctions;
  */
 class Helpers
 {
-    use Utilities, FileFunctions, StringFunctions, MaterialFunctions, WorldFunctions;
+    use Utilities, FileFunctions, StringFunctions, MaterialFunctions, WorldFunctions, LanguageFunctions;
 }
