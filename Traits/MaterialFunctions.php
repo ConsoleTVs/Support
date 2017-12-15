@@ -44,7 +44,7 @@ trait MaterialFunctions
             return $colors;
         }
 
-        return $colors->has($color) ? $colors->get($color) : null;
+        return $colors->has($color) ? $colors->get($color) : $color;
     }
 
     /**
