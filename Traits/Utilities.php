@@ -67,7 +67,17 @@ trait Utilities
 
         return array_search(max($count), $count);
     }
-
+    
+    public static function validGravatar($email) {
+        $hash = md5($email);
+        $uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
+        $headers = @get_headers($uri);
+        if (!preg_match("|200|", $headers[0])) {
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * Return the gavatar for the given email.
      *
