@@ -2,7 +2,7 @@
 
 namespace ConsoleTVs\Support\Traits;
 
-trait StringFUnctions
+trait StringFunctions
 {
     /**
      * Get a string between two substrings.
